@@ -24,10 +24,7 @@ import {
   Building2,
   Search,
   Download,
-  Sparkles,
   Rocket,
-  Target,
-  Lightbulb,
   Heart,
   Leaf,
   Monitor,
@@ -165,11 +162,10 @@ function App() {
   const menuItems = [
     { id: 'inicio', label: 'Inicio', icon: <TrendingUp className="w-4 h-4" /> },
     { id: 'quienes-somos', label: 'Quienes Somos', icon: <Users className="w-4 h-4" /> },
-    { id: 'papers', label: 'Papers', icon: <FileText className="w-4 h-4" /> },
-    { id: 'publicaciones', label: 'Publicaciones', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'proyectos', label: 'Proyectos', icon: <FileText className="w-4 h-4" /> },
+    { id: 'transferencia', label: 'Transferencia', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'noticias', label: 'Noticias', icon: <Newspaper className="w-4 h-4" /> },
     { id: 'sumate', label: 'Súmate', icon: <Building2 className="w-4 h-4" /> },
-    { id: 'club-elite', label: 'Club Élite', icon: <GraduationCap className="w-4 h-4" /> },
   ];
 
   // Estado para modales
@@ -180,7 +176,6 @@ function App() {
 
   // Estados para mostrar/ocultar formularios
   const [mostrarFormularioEmpresa, setMostrarFormularioEmpresa] = useState(false);
-  const [mostrarFormularioEstudiante, setMostrarFormularioEstudiante] = useState(false);
 
   // Estados para filtros de papers
   const [filtroAñoPaper, setFiltroAñoPaper] = useState('');
@@ -899,20 +894,20 @@ function App() {
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={300}>
               <div className="flex flex-wrap gap-4">
-                <Button 
-                  onClick={() => scrollToSection('papers')}
+                <Button
+                  onClick={() => scrollToSection('proyectos')}
                   className="bg-white text-utepsa-red hover:bg-white/90 px-8 py-6 text-base font-semibold"
                 >
                   <FileText className="w-5 h-5 mr-2" />
-                  Ver Papers
+                  Ver Proyectos
                 </Button>
-                <Button 
-                  onClick={() => scrollToSection('club-elite')}
-                  variant="outline" 
+                <Button
+                  onClick={() => scrollToSection('transferencia')}
+                  variant="outline"
                   className="border-2 border-white bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 hover:border-white px-8 py-6 text-base font-semibold shadow-lg"
                 >
-                  <GraduationCap className="w-5 h-5 mr-2" />
-                  Club Élite
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Transferencia de Conocimientos
                 </Button>
               </div>
             </ScrollReveal>
@@ -1018,7 +1013,7 @@ function App() {
                               const term = miembro.apellidoBusqueda || miembro.nombre.replace(/^MSc\.\s*/i, '').split(' ').pop() || '';
                               setFiltroAutorPublicacion(term);
                               setMostrarTodasPublicaciones(true);
-                              setTimeout(() => document.querySelector('#publicaciones')?.scrollIntoView({ behavior: 'smooth' }), 50);
+                              setTimeout(() => document.querySelector('#transferencia')?.scrollIntoView({ behavior: 'smooth' }), 50);
                             }}
                           >
                             {pubsDelMiembro.length} publicación{pubsDelMiembro.length !== 1 ? 'es' : ''}
@@ -1034,8 +1029,8 @@ function App() {
         </div>
       </section>
 
-      {/* Papers Section */}
-      <section id="papers" className="py-20 bg-gray-50">
+      {/* Proyectos Section */}
+      <section id="proyectos" className="py-20 bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <ScrollReveal animation="fadeIn" delay={0}>
@@ -1046,13 +1041,13 @@ function App() {
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={100}>
               <h2 className="text-3xl sm:text-4xl font-bold text-utepsa-gray-dark mb-4">
-                Papers del Observatorio
+                Proyectos de Transferencia de Tecnología
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={200}>
               <p className="text-utepsa-gray-light max-w-2xl mx-auto">
-                Descubre nuestras investigaciones científicas más recientes. 
-                Haz clic en cualquier paper para ver el resumen y acceder al documento completo.
+                Descubre nuestros proyectos más recientes de transferencia de tecnología.
+                Haz clic en cualquier proyecto para ver el resumen y acceder al documento completo.
               </p>
             </ScrollReveal>
           </div>
@@ -1221,7 +1216,7 @@ function App() {
       </section>
 
       {/* Publicaciones Section - Organizado por Líneas de Investigación */}
-      <section id="publicaciones" className="py-20 bg-white">
+      <section id="transferencia" className="py-20 bg-white">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <ScrollReveal animation="fadeIn" delay={0}>
@@ -1232,12 +1227,12 @@ function App() {
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={100}>
               <h2 className="text-3xl sm:text-4xl font-bold text-utepsa-gray-dark mb-4">
-                Publicaciones por Área
+                Transferencia de Conocimientos
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={200}>
               <p className="text-utepsa-gray-light max-w-2xl mx-auto">
-                Nuestras investigaciones se organizan en 5 líneas estratégicas de desarrollo.
+                Nuestra transferencia de conocimientos se organiza en 5 líneas estratégicas de desarrollo.
               </p>
             </ScrollReveal>
           </div>
@@ -1624,212 +1619,6 @@ function App() {
                     <Button className="w-full bg-utepsa-red hover:bg-utepsa-red/90 py-5">
                       <ArrowRight className="w-4 h-4 mr-2" />
                       Enviar Solicitud
-                    </Button>
-                  </form>
-                </div>
-              )}
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Club Élite Section - Para Estudiantes (Estilo colorido y juvenil) */}
-      <section id="club-elite" className="py-20 bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          {/* Header con imagen de fondo */}
-          <ScrollReveal animation="fadeIn" delay={0}>
-            <div className="relative rounded-3xl overflow-hidden mb-12">
-              <img 
-                src="/club-elite-jovenes.jpg" 
-                alt="Jóvenes investigando" 
-                className="w-full h-64 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">
-                <div className="p-8">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <img 
-                      src="/logo-elite.png" 
-                      alt="Club Élite Logo" 
-                      className="w-16 h-16 rounded-full bg-white p-2"
-                    />
-                    <div>
-                      <Badge className="bg-yellow-400 text-black border-yellow-400 mb-2">
-                        <Sparkles className="w-3 h-3 mr-1" />
-                        Programa Estudiantil Exclusivo
-                      </Badge>
-                      <h2 className="text-4xl sm:text-5xl font-bold text-white">
-                        Club Élite
-                      </h2>
-                    </div>
-                  </div>
-                  <p className="text-white/90 max-w-2xl text-lg">
-                    Un programa exclusivo para estudiantes destacados que desean desarrollar 
-                    su potencial en investigación de mercados y análisis de datos.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Beneficios del Club Élite - Estilo colorido */}
-            <ScrollReveal animation="slideInLeft" delay={100}>
-              <div className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-pink-500 rounded-2xl flex items-center justify-center transform rotate-3">
-                    <Rocket className="w-7 h-7 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-800">¿Por qué unirte?</h3>
-                    <p className="text-pink-500 font-medium">Para Estudiantes Ambiciosos</p>
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                  {[
-                    { icon: <Target className="w-4 h-4" />, text: 'Investigaciones aplicadas reales' },
-                    { icon: <BarChart3 className="w-4 h-4" />, text: 'Análisis de datos con empresas' },
-                    { icon: <Award className="w-4 h-4" />, text: 'Certificación académica' },
-                    { icon: <Lightbulb className="w-4 h-4" />, text: 'Habilidades de investigación' },
-                    { icon: <FileText className="w-4 h-4" />, text: 'Publicaciones y coautorías' },
-                    { icon: <Users className="w-4 h-4" />, text: 'Networking empresarial' },
-                    { icon: <Star className="w-4 h-4" />, text: 'Fortalecimiento del CV' },
-                    { icon: <Rocket className="w-4 h-4" />, text: 'Pasantías vinculadas' },
-                  ].map((beneficio, index) => (
-                    <div key={index} className="flex items-center space-x-2 p-3 bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl">
-                      <span className="text-pink-500">{beneficio.icon}</span>
-                      <span className="text-gray-700 text-sm font-medium">{beneficio.text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-4 rounded-xl border-l-4 border-orange-400">
-                  <p className="text-gray-700 font-semibold text-center italic">
-                    "El Club Élite me permitió graduarme con experiencia profesional real y conexiones valiosas."
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Botón para mostrar formulario - Estilo juvenil */}
-            <ScrollReveal animation="slideInRight" delay={200}>
-              <div className="flex flex-col justify-center items-center">
-              {!mostrarFormularioEstudiante ? (
-                <div className="text-center bg-white/10 backdrop-blur-sm p-10 rounded-3xl">
-                  <div className="w-28 h-28 bg-gradient-to-br from-yellow-300 via-orange-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                    <GraduationCap className="w-14 h-14 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4">
-                    ¿Quieres ser parte del Club Élite?
-                  </h3>
-                  <p className="text-white/80 mb-8 max-w-md text-lg">
-                    Postula ahora y comienza tu camino hacia la excelencia en investigación.
-                  </p>
-                  <Button 
-                    onClick={() => setMostrarFormularioEstudiante(true)}
-                    className="bg-white text-pink-600 hover:bg-yellow-300 hover:text-pink-700 px-10 py-7 text-xl font-bold rounded-full shadow-xl transition-all hover:scale-105"
-                  >
-                    <Sparkles className="w-6 h-6 mr-2" />
-                    ¡Postular Ahora!
-                    <ArrowRight className="w-6 h-6 ml-2" />
-                  </Button>
-                </div>
-              ) : (
-                <div className="bg-white p-8 rounded-3xl shadow-2xl w-full animate-fade-in">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-xl flex items-center justify-center">
-                        <Sparkles className="w-5 h-5 text-white" />
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-800">
-                        Postula al Club Élite
-                      </h3>
-                    </div>
-                    <button 
-                      onClick={() => setMostrarFormularioEstudiante(false)}
-                      className="text-gray-400 hover:text-pink-500 transition-colors"
-                    >
-                      <X className="w-6 h-6" />
-                    </button>
-                  </div>
-                  
-                  <form className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Nombre completo *
-                        </label>
-                        <Input placeholder="Tu nombre" className="bg-gray-50 border-pink-200 focus:border-pink-500" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Carrera *
-                        </label>
-                        <Input placeholder="Ej: Marketing" className="bg-gray-50 border-pink-200 focus:border-pink-500" />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Semestre *
-                      </label>
-                      <select className="w-full h-10 px-3 rounded-md border border-pink-200 bg-gray-50 text-sm focus:border-pink-500">
-                        <option value="">Selecciona tu semestre</option>
-                        <option value="1">1° Semestre</option>
-                        <option value="2">2° Semestre</option>
-                        <option value="3">3° Semestre</option>
-                        <option value="4">4° Semestre</option>
-                        <option value="5">5° Semestre</option>
-                        <option value="6">6° Semestre</option>
-                        <option value="7">7° Semestre</option>
-                        <option value="8">8° Semestre</option>
-                        <option value="9">9° Semestre o más</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Áreas de interés *
-                      </label>
-                      <Input placeholder="Ej: Análisis de datos, investigación de mercados" className="bg-gray-50 border-pink-200 focus:border-pink-500" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        ¿Has trabajado con datos antes? *
-                      </label>
-                      <div className="flex space-x-4">
-                        <label className="flex items-center space-x-2 cursor-pointer">
-                          <input type="radio" name="experiencia" className="text-pink-500 focus:ring-pink-500" />
-                          <span className="text-sm text-gray-700">Sí</span>
-                        </label>
-                        <label className="flex items-center space-x-2 cursor-pointer">
-                          <input type="radio" name="experiencia" className="text-pink-500 focus:ring-pink-500" />
-                          <span className="text-sm text-gray-700">No</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Motivación (breve) *
-                      </label>
-                      <Textarea 
-                        placeholder="Cuéntanos por qué quieres unirte al Club Élite..." 
-                        rows={3}
-                        className="bg-gray-50 resize-none border-pink-200 focus:border-pink-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        CV adjunto
-                      </label>
-                      <div className="border-2 border-dashed border-pink-200 rounded-xl p-4 text-center hover:border-pink-500 hover:bg-pink-50 transition-all cursor-pointer">
-                        <FileText className="w-8 h-8 text-pink-400 mx-auto mb-2" />
-                        <p className="text-sm text-gray-500">Arrastra tu CV aquí o haz clic para seleccionar</p>
-                        <p className="text-xs text-gray-400 mt-1">PDF, DOC o DOCX (máx. 5MB)</p>
-                      </div>
-                    </div>
-                    <Button className="w-full bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white py-5 rounded-xl font-bold">
-                      <Rocket className="w-5 h-5 mr-2" />
-                      Enviar Postulación
                     </Button>
                   </form>
                 </div>
