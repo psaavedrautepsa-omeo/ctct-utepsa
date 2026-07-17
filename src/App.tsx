@@ -242,6 +242,8 @@ function App() {
     { id: 'edwin-mamani', nombre: 'MSc. Edwin Mamani Ávila', cargo: 'Docente participante', imagen: '/edwin-mamani.jpg' },
     { id: 'ruben-alvarez', nombre: 'Lic. Rubén Oscar Alvarez Hinojosa', cargo: 'Docente participante', imagen: '/Ruben-Alvarez.png' },
     { id: 'liliana-poquechoque', nombre: 'MSc. Liliana Poquechoque Cortez', cargo: 'Docente participante', imagen: '/liliana-poquechoque.png' },
+    { id: 'mariela-suarez', nombre: 'Ing. Mariela Suarez Portales', cargo: 'Docente participante', imagen: '/mariela-suarez.jpeg' },
+    { id: 'gustavo-porcel', nombre: 'Lic. Gustavo Porcel Vaca', cargo: 'Docente participante', imagen: '/gustavo-porcel.png' },
   ];
 
   const socios: Socio[] = [
