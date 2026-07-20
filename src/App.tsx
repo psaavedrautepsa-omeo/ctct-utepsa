@@ -244,6 +244,8 @@ function App() {
     { id: 'liliana-poquechoque', nombre: 'MSc. Liliana Poquechoque Cortez', cargo: 'Docente participante', imagen: '/liliana-poquechoque.png' },
     { id: 'mariela-suarez', nombre: 'Ing. Mariela Suarez Portales', cargo: 'Docente participante', imagen: '/mariela-suarez.jpeg' },
     { id: 'gustavo-porcel', nombre: 'Lic. Gustavo Porcel Vaca', cargo: 'Docente participante', imagen: '/gustavo-porcel.png' },
+    { id: 'maria-montero', nombre: 'Ing. María Montero Sopeppi', cargo: 'Docente participante', imagen: '/maria-montero.png' },
+    { id: 'jose-yepez', nombre: 'Ing. Jose Rene Yepez Justiniano', cargo: 'Docente participante', imagen: '/jose-yepez.png' },
   ];
 
   const socios: Socio[] = [
