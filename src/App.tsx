@@ -239,15 +239,15 @@ function App() {
   }
 
   const docentesParticipantes: Docente[] = [
-    { id: 'edwin-mamani', nombre: 'MSc. Edwin Mamani Ávila', cargo: 'Docente participante', imagen: '/edwin-mamani.jpg' },
     { id: 'ruben-alvarez', nombre: 'Lic. Rubén Oscar Alvarez Hinojosa', cargo: 'Docente participante', imagen: '/Ruben-Alvarez.png' },
-    { id: 'liliana-poquechoque', nombre: 'MSc. Liliana Poquechoque Cortez', cargo: 'Docente participante', imagen: '/liliana-poquechoque.png' },
-    { id: 'mariela-suarez', nombre: 'Ing. Mariela Suarez Portales', cargo: 'Docente participante', imagen: '/mariela-suarez.jpeg' },
-    { id: 'gustavo-porcel', nombre: 'Lic. Gustavo Porcel Vaca', cargo: 'Docente participante', imagen: '/gustavo-porcel.png' },
-    { id: 'maria-montero', nombre: 'Ing. María Montero Sopeppi', cargo: 'Docente participante', imagen: '/maria-montero.png' },
-    { id: 'jose-yepez', nombre: 'Ing. Jose Rene Yepez Justiniano', cargo: 'Docente participante', imagen: '/jose-yepez.png' },
     { id: 'angelica-arias', nombre: 'Ing. Angelica Maria Arias Madrid', cargo: 'Docente participante', imagen: '/angelica-arias.jpeg' },
+    { id: 'edwin-mamani', nombre: 'MSc. Edwin Mamani Ávila', cargo: 'Docente participante', imagen: '/edwin-mamani.jpg' },
+    { id: 'maria-montero', nombre: 'Ing. María Montero Sopeppi', cargo: 'Docente participante', imagen: '/maria-montero.png' },
+    { id: 'liliana-poquechoque', nombre: 'MSc. Liliana Poquechoque Cortez', cargo: 'Docente participante', imagen: '/liliana-poquechoque.png' },
+    { id: 'gustavo-porcel', nombre: 'Lic. Gustavo Porcel Vaca', cargo: 'Docente participante', imagen: '/gustavo-porcel.png' },
     { id: 'margoth-salazar', nombre: 'Ing. Margoth Salazar Suarez', cargo: 'Docente participante', imagen: '/margoth-salazar.jpeg' },
+    { id: 'mariela-suarez', nombre: 'Ing. Mariela Suarez Portales', cargo: 'Docente participante', imagen: '/mariela-suarez.jpeg' },
+    { id: 'jose-yepez', nombre: 'Ing. Jose Rene Yepez Justiniano', cargo: 'Docente participante', imagen: '/jose-yepez.png' },
   ];
 
   const socios: Socio[] = [
