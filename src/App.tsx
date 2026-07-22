@@ -241,7 +241,10 @@ function App() {
   const docentesParticipantes: Docente[] = [
     { id: 'ruben-alvarez', nombre: 'Lic. Rubén Oscar Alvarez Hinojosa', cargo: 'Docente participante', imagen: '/Ruben-Alvarez.png' },
     { id: 'angelica-arias', nombre: 'Ing. Angelica Maria Arias Madrid', cargo: 'Docente participante', imagen: '/angelica-arias.jpeg' },
+    { id: 'juan-estivariz', nombre: 'Ing. Juan Mauricio Estivariz del Castillo', cargo: 'Docente participante', imagen: '/juan-estivariz.png' },
     { id: 'edwin-mamani', nombre: 'MSc. Edwin Mamani Ávila', cargo: 'Docente participante', imagen: '/edwin-mamani.jpg' },
+    { id: 'max-mamani', nombre: 'Ing. Max Mamani Huanca', cargo: 'Docente participante', imagen: '/max-mamani.png' },
+    { id: 'mabel-mendoza', nombre: 'Ing. Mabel Patricia Mendoza Flores', cargo: 'Docente participante', imagen: '/mabel-mendoza.png' },
     { id: 'maria-montero', nombre: 'Ing. María Montero Sopeppi', cargo: 'Docente participante', imagen: '/maria-montero.png' },
     { id: 'liliana-poquechoque', nombre: 'MSc. Liliana Poquechoque Cortez', cargo: 'Docente participante', imagen: '/liliana-poquechoque.png' },
     { id: 'gustavo-porcel', nombre: 'Lic. Gustavo Porcel Vaca', cargo: 'Docente participante', imagen: '/gustavo-porcel.png' },
