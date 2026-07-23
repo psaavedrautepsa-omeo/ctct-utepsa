@@ -15,7 +15,9 @@ import {
   Phone,
   MapPin,
   Cpu,
-  Wrench
+  Wrench,
+  Calendar,
+  ExternalLink
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -124,6 +126,60 @@ function StatCounter({ target, label, delay = 0 }: { target: number; label: stri
   );
 }
 
+interface ProyectoTaller {
+  id: string;
+  año: string;
+  titulo: string;
+  resumen: string;
+  docentes: string;
+  link?: string;
+}
+
+interface GrupoProyectos {
+  id: string;
+  programa: string;
+  lineas: string[];
+  proyectos: ProyectoTaller[];
+}
+
+function ProyectoItemCard({ proyecto }: { proyecto: ProyectoTaller }) {
+  const [expandido, setExpandido] = useState(false);
+  return (
+    <div className="border-b border-gray-100 last:border-0 py-5">
+      <div className="flex items-center gap-2 mb-2">
+        <Badge className="bg-utepsa-red/10 text-utepsa-red border-utepsa-red/20 text-xs">
+          <Calendar className="w-3 h-3 mr-1" />
+          {proyecto.año}
+        </Badge>
+      </div>
+      <h4 className="font-semibold text-utepsa-gray-dark mb-1">{proyecto.titulo}</h4>
+      <p className={`text-sm text-utepsa-gray-light leading-relaxed ${expandido ? '' : 'line-clamp-2'}`}>
+        {proyecto.resumen}
+      </p>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2">
+        <button
+          onClick={() => setExpandido(!expandido)}
+          className="text-xs font-medium text-utepsa-red hover:underline"
+        >
+          {expandido ? 'Ver menos' : 'Ver más'}
+        </button>
+        <span className="text-xs text-utepsa-gray-light">{proyecto.docentes}</span>
+        {proyecto.link && (
+          <a
+            href={proyecto.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium text-utepsa-red hover:underline flex items-center"
+          >
+            Ver informe
+            <ExternalLink className="w-3 h-3 ml-1" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
@@ -156,49 +212,219 @@ function App() {
     { id: 'sumate', label: 'Súmate', icon: <Building2 className="w-4 h-4" /> },
   ];
 
-  interface Proyecto {
+  interface Iniciativa {
     id: string;
     titulo: string;
     descripcion: string;
     imagen: string;
   }
 
-  // Proyectos de transferencia de tecnología
-  const proyectos: Proyecto[] = [
+  // Proyectos de transferencia de tecnología, agrupados por programa/alianza
+  const proyectosPorPrograma: GrupoProyectos[] = [
     {
-      id: 'agua-potable',
-      titulo: 'Planta de tratamiento de agua potable',
-      descripcion: 'Implementación de un sistema de tratamiento de agua junto a COOPAPPI, llevando agua segura a comunidades de la región.',
-      imagen: '/proyecto-agua-potable.jpg'
+      id: 'adapicruz',
+      programa: 'ADAPICRUZ',
+      lineas: ['Emprendimiento', 'Innovación Tecnología y Desarrollo', 'Educación de Calidad', 'Desarrollo Humano'],
+      proyectos: [
+        {
+          id: 'adapicruz-1',
+          año: '2025',
+          titulo: 'Innovación y emprendimiento apícola',
+          resumen: 'UTEPSA y la Asociación de Apicultores de Santa Cruz (ADAPICRUZ) han fortalecido el sector apícola mediante capacitaciones previas en marketing, comercialización y diversificación de productos como gomitas de miel, y actualmente buscan impulsar la innovación a través de la creación de cosméticos con valor agregado (jabones, cremas y bálsamos) capacitando a mujeres productoras en transformación de materia prima, gestión de microempresas, cálculo de costos y ventas por redes sociales para promover su autonomía económica.',
+          docentes: 'Ing. Siomara D. Guzmán C.',
+          link: 'https://docs.google.com/document/d/1U_wS20EifvetaVV_eHqXcBD59t03pE0v/edit?usp=sharing&ouid=108661462190112978404&rtpof=true&sd=true'
+        },
+        {
+          id: 'adapicruz-2',
+          año: '2025',
+          titulo: 'Innovación y emprendimiento apícola',
+          resumen: 'En convenio con ADAPICRUZ, este proyecto busca potenciar la formación práctica de los estudiantes de las materias de Química General e Inorgánica, Química Orgánica y Procesos Industriales mediante el desarrollo de productos alimenticios y de belleza innovadores a base de miel, propóleo y jalea real. Iniciado a principios de gestión, el proceso abarcó la formulación por parte de los alumnos del módulo 2 y sus posteriores reajustes con el módulo 3 hasta consolidar la presentación del producto final a la institución. De este modo, la iniciativa fortalece los conocimientos técnicos del estudiantado, genera productos de alto valor agregado y fomenta una colaboración sostenible entre la universidad y la industria apícola.',
+          docentes: 'Ing. Mariela Suárez Portales'
+        },
+        {
+          id: 'adapicruz-3',
+          año: '2025',
+          titulo: 'Innovación y emprendimiento apícola',
+          resumen: 'En el marco del convenio interinstitucional entre UTEPSA y ADAPICRUZ, se ejecutó un proyecto colaborativo enfocado en la revalorización de productos apícolas mediante la investigación de mercado, la formulación académica de productos de valor agregado y la posterior transferencia de conocimiento a productores y mujeres apícolas. A través de capacitaciones impartidas los días 21 y 29 de julio, se enseñó la elaboración de diversos cosméticos y alimentos sostenibles (como champú, jabón líquido, crema humectante, bálsamo labial, gomitas naturales, sérum para acné, tónico facial y agua micelar de aloe), fortaleciendo el aprendizaje experiencial de los estudiantes, el vínculo universidad-sector productivo y el emprendimiento local bajo un enfoque de economía circular.',
+          docentes: 'Ing. Mariela Suárez Portales'
+        },
+        {
+          id: 'adapicruz-4',
+          año: '2025',
+          titulo: 'Marketing digital y estrategias de venta online para microempresarios apícolas',
+          resumen: 'Como parte del Proyecto de Transferencia de Conocimiento y en coordinación con AGAPICRUZ, se realizó en La Guardia el taller "Marketing Digital y Estrategias de Venta Online para Microempresarios Apícolas", dictado por el Lic. Gustavo Porcel junto a sus estudiantes de Marketing Digital. La capacitación estuvo dirigida a productores de miel y derivados cosméticos, respiratorios y alimenticios, brindándoles herramientas teóricas y prácticas para potenciar sus negocios en plataformas como Facebook, Instagram, TikTok, WhatsApp Business, Wix, Takenos, Template.net, Flipsnack y Bio.site.',
+          docentes: 'Lic. Gustavo Porcel'
+        }
+      ]
     },
     {
-      id: 'maquinaria-alimentos',
-      titulo: 'Maquinaria para transformación de alimentos',
-      descripcion: 'Diseño y entrega de equipos agroindustriales que fortalecen la producción y transformación de alimentos en ferias tecnológicas.',
-      imagen: '/proyecto-maquinaria-alimentos.jpg'
+      id: 'bth',
+      programa: 'BTH - Fortalecimiento BTH',
+      lineas: ['Emprendimiento', 'Innovación Tecnología y Desarrollo', 'Educación de Calidad'],
+      proyectos: [
+        {
+          id: 'bth-1',
+          año: '2025',
+          titulo: 'Taller de utilización de extintores en situaciones de emergencia',
+          resumen: 'Con el objetivo de instruir en la respuesta ante emergencias, se llevó a cabo una capacitación sobre el uso y manejo de extintores que combinó una etapa teórica sobre los principios y tipos de fuego con una práctica guiada. Durante la actividad, tanto hombres como mujeres aprendieron a identificar y utilizar correctamente los equipos, participando activamente en la extinción de un fuego controlado con extintores de polvo químico seco de 6 kg y 12 kg.',
+          docentes: 'Ing. Maria Fernanda Cuellar Salvatierra',
+          link: 'https://docs.google.com/document/d/1sEKV0egvN3MqMSUfDt2XVXqwgRp_pql8/edit?usp=sharing&ouid=108661462190112978404&rtpof=true&sd=true'
+        },
+        {
+          id: 'bth-2',
+          año: '2025',
+          titulo: 'Capacitación docente en proyectos de grado del BTH: enfoque metodológico y evaluativo',
+          resumen: 'Realizada en el módulo Nacional La Guardia con la participación de 30 docentes, la capacitación enfocada en el «Enfoque Metodológico y Evaluativo en Proyectos de Grado del BTH» estuvo dirigida a docentes, tutores, guías y evaluadores de dichos proyectos. El objetivo principal de la jornada fue fortalecer sus competencias y capacidades para brindar un adecuado acompañamiento, orientación y evaluación en las distintas modalidades de los proyectos de grado, garantizando un desarrollo metodológico riguroso y en total conformidad con las disposiciones del Reglamento de Graduación del BTH.',
+          docentes: 'Ing. José Yepez Justiniano'
+        },
+        {
+          id: 'bth-3',
+          año: '2025',
+          titulo: 'Capacitación para estudiantes en proyectos de grado del BTH: enfoque metodológico y aplicativo',
+          resumen: 'La capacitación «Enfoque Metodológico y Aplicativo para Estudiantes en Proyectos de Grado del BTH» se llevó a cabo en la sala auditorio E–300 de UTEPSA, contando con la participación de aproximadamente 90 estudiantes de 5to y 6to de secundaria del módulo educativo Nacional La Guardia. El evento se centró en brindar a los estudiantes elaboradores herramientas prácticas, participativas y comprensibles para diseñar, estructurar y justificar adecuadamente sus proyectos según la modalidad elegida, asegurando que su desarrollo se ajuste rigurosamente a los lineamientos establecidos en el Reglamento de Graduación del BTH.',
+          docentes: 'Ing. José Yepez Justiniano'
+        },
+        {
+          id: 'bth-4',
+          año: '2025',
+          titulo: 'Taller de transferencia tecnológica y capacitación técnica multidisciplinaria',
+          resumen: 'Como parte del Proyecto de Transferencia de Conocimiento, se impartieron talleres prácticos y teóricos en el módulo BTH del municipio de La Guardia, dirigidos a estudiantes del bachillerato técnico humanístico. La actividad contó con la participación de las carreras de Ingeniería Industrial, Mecánica, Eléctrica y Electrónica, cuyos docentes y alumnos capacitaron en áreas clave de su especialidad: electrónica enseñó domótica y programación básica; mecánica y eléctrica abordaron normativas eléctricas y mantenimiento vehicular preventivo y correctivo; e industrial capacitó en elaboración de lácteos, uso de EPP, trazabilidad y Buenas Prácticas de Manufactura, fortaleciendo así la formación técnica e inocuidad laboral de los participantes.',
+          docentes: 'Ing. Jaime Huallpara, Ing. Marco Alvarez, e Ing. Angelica Arias'
+        }
+      ]
     },
     {
-      id: 'empaquetado',
-      titulo: 'Equipo de sellado y empaquetado',
-      descripcion: 'Desarrollo de maquinaria para el sellado y empaquetado de productos, apoyando a pequeños emprendimientos productivos.',
-      imagen: '/proyecto-empaquetado.jpg'
+      id: 'pastoral-caritas',
+      programa: 'Pastoral Cáritas',
+      lineas: ['Emprendimiento', 'Innovación Tecnología y Desarrollo', 'Educación de Calidad'],
+      proyectos: [
+        {
+          id: 'caritas-1',
+          año: '2025',
+          titulo: 'Elaboración de productos de limpieza',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, se realizó un taller práctico y teórico sobre la elaboración de productos de limpieza del hogar en la parroquia San Roque, impartido por el equipo del Laboratorio de Procesos Industriales para hombres y mujeres interesados. Durante la jornada, los asistentes aprendieron la formulación precisa y el desarrollo adaptado de desinfectante de pisos, lavavajillas y desengrasante, complementando el aprendizaje con capacitación en control de calidad mediante la medición de pH, uso correcto de equipos de medición, manipulación segura de químicos y la aplicación de medidas de bioseguridad como el uso del Equipo de Protección Personal (EPP).',
+          docentes: 'Ing. Angelica Maria Arias Madrid',
+          link: 'https://docs.google.com/document/d/1cLbJw47mGXMmNyF8QUdRaprp7fzZj9hX/edit?usp=sharing&ouid=108661462190112978404&rtpof=true&sd=true'
+        },
+        {
+          id: 'caritas-2',
+          año: '2025',
+          titulo: 'Elaboración de productos de cuidado personal y rutina skincare',
+          resumen: 'Como parte del Proyecto de Transferencia de Conocimiento y bajo la iniciativa CARITAS, se impartió en la parroquia Sagrada Familia un taller teórico-práctico sobre productos de cuidado personal y rutina skincare, liderado por estudiantes de la materia de Procesos Industriales I. Dirigido a hombres y mujeres interesados, la capacitación abordó la formulación adaptada de cuatro productos (crema hidratante, mascarilla facial, bloqueador solar y bálsamo labial), complementando la enseñanza con control de calidad enfocado en la medición del pH, el manejo correcto de equipos e insumos químicos, y la aplicación estricta de normas de seguridad mediante el uso de Equipo de Protección Personal (EPP).',
+          docentes: 'Ing. Siomara Guzmán C.'
+        },
+        {
+          id: 'caritas-3',
+          año: '2025',
+          titulo: 'Elaboración de productos de limpieza para el hogar',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, el equipo del Laboratorio de Procesos Industriales impartió un taller teórico-práctico en la parroquia San Miguel Arcángel para capacitar a personas interesadas en la elaboración de productos de limpieza. Durante la jornada, los asistentes aprendieron la formulación y preparación de lavavajillas y desengrasante mediante guías adaptables a sus necesidades, recibiendo además instrucción técnica sobre control de calidad con medición de pH, manejo adecuado de equipos e insumos químicos, y la aplicación indispensable de medidas de bioseguridad como el uso de Equipo de Protección Personal (EPP).',
+          docentes: 'Ing. Angelica Maria Arias Madrid'
+        },
+        {
+          id: 'caritas-4',
+          año: '2025',
+          titulo: 'Elaboración de néctares de fruta en versión artesanal e industrial',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento y la iniciativa CARITAS, estudiantes de Química Orgánica dictaron en la parroquia Sagrada Familia un taller teórico-práctico sobre la elaboración artesanal e industrial de néctares de fruta (frutilla, manzana y piña). Dirigido a hombres y mujeres interesados, la jornada incluyó la entrega de formulaciones adaptables a distintos volúmenes, capacitación sobre el uso de aditivos alimentarios y un análisis comparativo entre ambos procesos de producción. Asimismo, se enseñaron criterios de control de calidad enfocados en la evaluación sensorial (pruebas organolépticas) y se promovió la seguridad laboral mediante el uso correcto del Equipo de Protección Personal (EPP).',
+          docentes: 'Ing. Margoth Salazar'
+        },
+        {
+          id: 'caritas-5',
+          año: '2025',
+          titulo: 'Taller de "Autoestima"',
+          resumen: 'En la pastoral CARITAS y como parte del Proyecto de Transferencia de Conocimiento, se impartieron dos talleres dirigidos al desarrollo personal y productivo de las asistentes: uno sobre Autoestima, dictado por el área de Psicología (Lic. Victor Flores, supervisado por la Lic. Libby Alvarez) para abordar el autocuidado y la asertividad; y otro de Cosmética, guiado por la Ing. Siomara Guzmán, enfocado en la elaboración práctica de bases de cremas adaptadas a distintos tipos de piel, mascarillas y jabones en barra.',
+          docentes: 'Ing. Siomara Guzmán C.'
+        },
+        {
+          id: 'caritas-6',
+          año: '2025',
+          titulo: 'Elaboración de productos alimenticios',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, el equipo del Laboratorio de Procesos Industriales impartió un taller teórico-práctico en la parroquia Santa Lucía para capacitar a hombres y mujeres en la elaboración de derivados lácteos. Durante la jornada, los participantes aprendieron la formulación y preparación de queso gourmet, queso crema, yogurt natural y mantequilla mediante guías adaptables a sus necesidades. Además, recibieron instrucción en control de calidad con medición de pH, uso correcto de equipos y utensilios, e implementación de normas de inocuidad y Equipo de Protección Personal (EPP).',
+          docentes: 'Ing. Angelica Maria Arias Madrid'
+        },
+        {
+          id: 'caritas-7',
+          año: '2025',
+          titulo: 'Taller de capacitación de personas en situación de vulnerabilidad',
+          resumen: 'Como parte de la alianza entre la Universidad UTEPSA y la Pastoral Cáritas, se implementa un proyecto de talleres solidarios dirigido a personas en situación de vulnerabilidad para impulsar su autonomía económica e ingresos mediante el emprendimiento. En sus primeras jornadas, los participantes adquirieron herramientas técnicas para la elaboración de alimentos y productos de limpieza (como detergente lavavajillas y limpia pisos), fortaleciendo la creatividad, el trabajo en equipo y el desarrollo comunitario sostenible.',
+          docentes: 'Ing. Mariela Suárez Portales'
+        },
+        {
+          id: 'caritas-8',
+          año: '2025',
+          titulo: 'Capacitación sobre producción de derivados lácteos y buenas prácticas de manufactura',
+          resumen: 'La carrera de Ingeniería Industrial y Comercial, junto al Centro de Transferencia de Conocimiento, llevó a cabo capacitaciones en Ciudad Satélite enfocadas en la producción de derivados lácteos y Buenas Prácticas de Manufactura (BPM). En la jornada teórico-práctica, los asistentes aprendieron la elaboración de yogurt griego, queso crema gourmet y mantequilla mediante formulaciones adaptables, además de capacitarse en controles de calidad (medición de pH, densidad y prueba de alcohol), higiene e inocuidad laboral, uso de Equipo de Protección Personal (EPP), manejo correcto de utensilios y organización del espacio de trabajo bajo un sistema de trazabilidad.',
+          docentes: 'Ing. Angelica Maria Arias Madrid'
+        },
+        {
+          id: 'caritas-9',
+          año: '2025',
+          titulo: 'Taller de capacitación de personas en situación de vulnerabilidad',
+          resumen: 'Mediante una alianza entre la Universidad UTEPSA y la Pastoral Cáritas, se desarrolla un proyecto de talleres solidarios orientados a la capacitación de personas en situación de vulnerabilidad. La iniciativa busca brindar herramientas prácticas, conocimientos y habilidades técnicas que impulsen la autogestión y el emprendimiento, promoviendo el fortalecimiento de la autonomía económica y la mejora de la calidad de vida de los participantes.',
+          docentes: 'Ing. Mariela Suárez Portales'
+        }
+      ]
     },
     {
-      id: 'pozos-agua',
-      titulo: 'Perforación y equipamiento de pozos de agua',
-      descripcion: 'Proyectos de perforación de pozos para el acceso a agua en comunidades, en conjunto con equipos técnicos especializados.',
-      imagen: '/proyecto-pozos-agua.jpg'
-    },
-    {
-      id: 'planta-procesadora',
-      titulo: 'Instalación de equipos en planta procesadora',
-      descripcion: 'Acompañamiento técnico en la instalación y puesta en marcha de equipos industriales en plantas de procesamiento.',
-      imagen: '/proyecto-planta-procesadora.jpg'
+      id: 'mujeres-5v',
+      programa: 'Mujeres 5V',
+      lineas: ['Emprendimiento', 'Innovación Tecnología y Desarrollo', 'Educación de Calidad'],
+      proyectos: [
+        {
+          id: 'mujeres5v-1',
+          año: '2025',
+          titulo: 'Taller de "Elaboración de Aderezos Nutritivos"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, el equipo del Laboratorio de Procesos Industriales impartió un taller teórico-práctico sobre aderezos nutritivos en el municipio de Saavedra, dirigido a amas de casa. La capacitación buscó promover alternativas alimentarias saludables utilizando materias primas locales accesibles mediante la formulación precisa de cinco preparaciones: mayonesa saludable, mayonesa de ajo asado con tocino, mayonesa de maní, aderezo de palta y aderezo de zanahoria. Asimismo, se reforzó la calidad e inocuidad alimentaria priorizando aspectos clave de higiene personal, manipulación adecuada de insumos y correctas técnicas de almacenamiento y conservación.',
+          docentes: 'Ing. Angelica Maria Arias Madrid',
+          link: 'https://docs.google.com/document/d/1q_l6zypozX1nVS_G_u73F_22PTO4Znv7/edit?usp=sharing&ouid=108661462190112978404&rtpof=true&sd=true'
+        },
+        {
+          id: 'mujeres5v-2',
+          año: '2025',
+          titulo: 'Taller de "Semillas y Legumbres y su impacto en el aprendizaje"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento y bajo el programa Mujeres 5V, el área de Ciencias Básicas dictó el taller «Semillas y Legumbres y su impacto en el aprendizaje» en el municipio de Saavedra, contando con la participación de 19 mujeres. La jornada tuvo como objetivo dar a conocer las propiedades nutricionales y los beneficios cognitivos de estos alimentos en la dieta diaria, además de enseñar la elaboración práctica de crackers de semillas variadas, snack de garbanzos y pudín de chía. Para garantizar la réplica de las recetas y la conservación de los productos, se entregó a cada participante un manual con proporciones detalladas e instrucciones sobre almacenamiento e inocuidad.',
+          docentes: 'Ing. Mariela Suárez Portales'
+        },
+        {
+          id: 'mujeres5v-3',
+          año: '2025',
+          titulo: 'Taller de "Autoestima"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, se impartió el taller de «Autoestima» en la comunidad de Saavedra, dirigido a mujeres interesadas en su desarrollo personal y emocional. La jornada fue facilitada por estudiantes del semillero de la carrera de Psicología junto al Lic. Victor Flores Escalante, bajo la supervisión de la Lic. Libby Alvarez Hidalgo. Durante la sesión se trabajaron de manera teórico-práctica los conceptos de autoestima, autocuidado y asertividad, brindando a las asistentes herramientas y técnicas aplicadas para su crecimiento personal.',
+          docentes: 'Ing. Libby Alvarez'
+        },
+        {
+          id: 'mujeres5v-4',
+          año: '2025',
+          titulo: 'Taller de "Elaboración de helado artesanal y semiindustrial"',
+          resumen: 'En la comunidad de Saavedra y en el marco del Proyecto de Transferencia de Conocimiento (programa Mujeres 5V), se realizaron dos talleres para mujeres enfocados en el emprendimiento y el bienestar personal: Helado Artesanal y Semiindustrial, donde docentes de Ciencias Básicas enseñaron técnicas de elaboración, uso de aditivos, control de calidad organoléptico, inocuidad y uso de EPP, entregando recetas adaptables para producción a distinta escala; y Autoestima, donde el equipo de Psicología (Lic. Victor Flores, supervisado por la Lic. Libby Alvarez y estudiantes del semillero) brindó herramientas prácticas sobre autocuidado, amor propio y asertividad.',
+          docentes: 'Ing. Siomara Guzmán C.'
+        },
+        {
+          id: 'mujeres5v-5',
+          año: '2025',
+          titulo: 'Taller de "Gomitas vitaminadas"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, se impartió el taller teórico-práctico de «Gomitas Vitaminadas» en la comunidad de Saavedra, dictado por la docente de Ciencias Básicas, Ing. María García, con el apoyo de auxiliares de laboratorio. Dirigido a mujeres de la comunidad, la capacitación enseñó a formular y elaborar tres variedades nutritivas para niños: gomitas de zanahoria y remolacha, de pomelo y papaya, y de jengibre, miel, propóleo y limón. Las participantes recibieron una guía de trabajo con dosificación de aditivos y vitaminas, enfatizando aspectos clave del proceso como la precisión en el pesaje, el control de temperatura y la esterilización de envases.',
+          docentes: 'Ing. María García'
+        },
+        {
+          id: 'mujeres5v-6',
+          año: '2025',
+          titulo: 'Taller de "Manejo de redes sociales"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, se impartió el taller de «Manejo de Redes Sociales» en la comunidad de Saavedra, dictado por el Lic. Gustavo Porcel (docente y encargado del Laboratorio de Comunicación) junto a sus estudiantes. La capacitación estuvo dirigida a mujeres de la zona interesadas en comercializar y potenciar la venta de los productos elaborados en talleres previos. Durante la jornada teórico-práctica, las participantes aprendieron el uso estratégico de plataformas como Instagram, Facebook y TikTok, así como el diseño de catálogos mediante la herramienta Canva.',
+          docentes: 'Lic. Gustavo Porcel'
+        },
+        {
+          id: 'mujeres5v-7',
+          año: '2025',
+          titulo: 'Taller de "La ruta legal del emprendedor" y modelo de negocio "Business Canvas"',
+          resumen: 'En el marco del Proyecto de Transferencia de Conocimiento, se impartió el taller sobre «La Ruta Legal del Emprendedor» y el modelo de negocio «Business Canvas» en la comunidad de Saavedra. La capacitación fue dictada por el Dr. Adolfo Dávila (docente de Derecho) y el Lic. Pablo Tavera (Centro de Emprendimiento), junto al apoyo de estudiantes. Dirigido a mujeres interesadas en estructurar y formalizar sus proyectos, el encuentro abordó de manera teórico-práctica los pasos de la normativa legal para la formalización empresarial, así como el uso del lienzo Canvas para definir la organización del negocio, costos y público objetivo.',
+          docentes: 'Lic. Adolfo Dávila'
+        }
+      ]
     }
   ];
 
   // Iniciativas de transferencia de conocimiento
-  const iniciativasTransferencia: Proyecto[] = [
+  const iniciativasTransferencia: Iniciativa[] = [
     {
       id: 'higiene',
       titulo: 'Taller comunitario de elaboración de productos de higiene',
@@ -450,7 +676,7 @@ function App() {
                 <div className="grid sm:grid-cols-3 gap-4 mb-8">
                   <StatCounter target={13} label="Socios estratégicos" delay={100} />
                   <StatCounter target={2} label="Líneas de transferencia" delay={200} />
-                  <StatCounter target={9} label="Proyectos y actividades" delay={300} />
+                  <StatCounter target={24} label="Proyectos y actividades" delay={300} />
                 </div>
               </div>
             </ScrollReveal>
@@ -556,24 +782,29 @@ function App() {
             </ScrollReveal>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {proyectos.map((proyecto, index) => (
-              <ScrollReveal key={proyecto.id} animation="fadeInUp" delay={100 + index * 100}>
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={proyecto.imagen}
-                      alt={proyecto.titulo}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <CardContent className="p-5">
-                    <h3 className="font-semibold text-utepsa-gray-dark mb-2">
-                      {proyecto.titulo}
-                    </h3>
-                    <p className="text-sm text-utepsa-gray-light leading-relaxed">
-                      {proyecto.descripcion}
-                    </p>
+          <div className="space-y-6 max-w-4xl mx-auto">
+            {proyectosPorPrograma.map((grupo, index) => (
+              <ScrollReveal key={grupo.id} animation="fadeInUp" delay={100 + index * 100}>
+                <Card className="overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                      <h3 className="text-xl font-bold text-utepsa-gray-dark">{grupo.programa}</h3>
+                      <span className="text-xs text-utepsa-gray-light">
+                        {grupo.proyectos.length} proyecto{grupo.proyectos.length !== 1 ? 's' : ''}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {grupo.lineas.map((linea) => (
+                        <Badge key={linea} variant="outline" className="text-xs text-utepsa-gray-light border-gray-200 font-normal">
+                          {linea}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div>
+                      {grupo.proyectos.map((proyecto) => (
+                        <ProyectoItemCard key={proyecto.id} proyecto={proyecto} />
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </ScrollReveal>
