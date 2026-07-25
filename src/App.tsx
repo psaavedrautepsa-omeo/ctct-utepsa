@@ -219,6 +219,40 @@ function App() {
     imagen: string;
   }
 
+  // Proyectos destacados de transferencia de tecnología
+  const proyectosDestacados: Iniciativa[] = [
+    {
+      id: 'agua-potable',
+      titulo: 'Planta de tratamiento de agua potable',
+      descripcion: 'Implementación de un sistema de tratamiento de agua junto a COOPAPPI, llevando agua segura a comunidades de la región.',
+      imagen: '/proyecto-agua-potable.jpg'
+    },
+    {
+      id: 'maquinaria-alimentos',
+      titulo: 'Maquinaria para transformación de alimentos',
+      descripcion: 'Diseño y entrega de equipos agroindustriales que fortalecen la producción y transformación de alimentos en ferias tecnológicas.',
+      imagen: '/proyecto-maquinaria-alimentos.jpg'
+    },
+    {
+      id: 'empaquetado',
+      titulo: 'Equipo de sellado y empaquetado',
+      descripcion: 'Desarrollo de maquinaria para el sellado y empaquetado de productos, apoyando a pequeños emprendimientos productivos.',
+      imagen: '/proyecto-empaquetado.jpg'
+    },
+    {
+      id: 'pozos-agua',
+      titulo: 'Perforación y equipamiento de pozos de agua',
+      descripcion: 'Proyectos de perforación de pozos para el acceso a agua en comunidades, en conjunto con equipos técnicos especializados.',
+      imagen: '/proyecto-pozos-agua.jpg'
+    },
+    {
+      id: 'planta-procesadora',
+      titulo: 'Instalación de equipos en planta procesadora',
+      descripcion: 'Acompañamiento técnico en la instalación y puesta en marcha de equipos industriales en plantas de procesamiento.',
+      imagen: '/proyecto-planta-procesadora.jpg'
+    }
+  ];
+
   // Proyectos de transferencia de tecnología, agrupados por programa/alianza
   const proyectosPorPrograma: GrupoProyectos[] = [
     {
@@ -781,6 +815,36 @@ function App() {
               </p>
             </ScrollReveal>
           </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {proyectosDestacados.map((proyecto, index) => (
+              <ScrollReveal key={proyecto.id} animation="fadeInUp" delay={100 + index * 100}>
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full">
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={proyecto.imagen}
+                      alt={proyecto.titulo}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="font-semibold text-utepsa-gray-dark mb-2">
+                      {proyecto.titulo}
+                    </h3>
+                    <p className="text-sm text-utepsa-gray-light leading-relaxed">
+                      {proyecto.descripcion}
+                    </p>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal animation="fadeInUp" delay={0}>
+            <h3 className="text-2xl font-bold text-utepsa-gray-dark mb-8 text-center">
+              Todos los proyectos por programa
+            </h3>
+          </ScrollReveal>
 
           <div className="space-y-6 max-w-4xl mx-auto">
             {proyectosPorPrograma.map((grupo, index) => (
