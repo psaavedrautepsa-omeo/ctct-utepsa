@@ -643,7 +643,7 @@ function App() {
             <ScrollReveal animation="fadeInUp" delay={200}>
               <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl">
                 Impulsando proyectos académicos con aplicación en la industria y la sociedad,
-                y llevando el conocimiento de la universidad a un impacto real en Santa Cruz y Bolivia.
+                y llevando el conocimiento de la universidad a un impacto real en Santa Cruz, Bolivia.
               </p>
             </ScrollReveal>
             <ScrollReveal animation="fadeInUp" delay={300}>
