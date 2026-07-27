@@ -768,7 +768,7 @@ function App() {
                 Docentes participantes
               </p>
             </ScrollReveal>
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {docentesParticipantes.map((docente, index) => (
                 <ScrollReveal key={docente.id} animation="fadeInUp" delay={150 + index * 100}>
                   <Card className="hover:shadow-lg transition-all duration-300">
